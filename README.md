@@ -33,10 +33,12 @@ III: Esperanza matemática.
     1.4. Teorema Central del Límite.
     
 IV: Introducción a Python.
+
     1.1. Simulación de un par de dados..
     1.2. Ejemplos.
     
 V: Simulación de variables aleatorias.
+
     1.1. Números pseudoaleatorios..
     1.2. Generación de números pseudo aleatorios.
     1.3. Pruebas de hipótesis.
@@ -44,6 +46,7 @@ V: Simulación de variables aleatorias.
     1.6. Generación de variables aleatorias con distribución uniforme.
 
 VI: Métodos de estimación por intervalos.
-   1.1. Estimación puntual y propiedades de los estimadores puntuales.
-   1.2. Método de Máxima verosimilitud.
-   1.3. Estimación por intervalos.
+    
+    1.1. Estimación puntual y propiedades de los estimadores puntuales.
+    1.2. Método de Máxima verosimilitud.
+    1.3. Estimación por intervalos.
