@@ -1,0 +1,117 @@
+---
+title: "análisis_de_factores"
+author: "Moisés Márquez Sánchez"
+date: "2024-11-28"
+output: html_document
+---
+
+# Cargar la librería psych para realizar análisis factorial
+# install.packages("psych") si no está instalada
+library(psych)
+
+# Cargar datos desde archivo CSV
+# Asegúrate de especificar la ruta correcta del archivo
+Data <- read.csv("~/Downloads/Data.csv")
+
+# Renombrar las columnas de forma genérica (V1, V2, ..., V14)
+names(Data) <- paste0("V", 1:14)
+
+# Calcular la matriz de correlación
+mat_cor <- cor(Data)
+
+# ---- Análisis factorial para 4 factores ----
+
+# Sin rotación
+factores_4_none <- fa(mat_cor, nfactors = 4, fm = "pa", rotate = "none", max.iter = 100)
+```{r , echo=FALSE}
+print(factores_4_none)
+```
+
+# Con rotación Varimax
+factores_4_varimax <- fa(mat_cor, nfactors = 4, fm = "pa", rotate = "varimax")
+```{r , echo=FALSE}
+print(factores_4_varimax)
+```
+
+# Con rotación Oblimin
+factores_4_oblimin <- fa(mat_cor, nfactors = 4, fm = "pa", rotate = "oblimin")
+```{r , echo=FALSE}
+print(factores_4_oblimin)
+```
+# ---- Análisis factorial para 5 factores ----
+
+# Sin rotación
+factores_5_none <- fa(mat_cor, nfactors = 5, fm = "pa", rotate = "none", max.iter = 100)
+```{r , echo=FALSE}
+print(factores_5_none)
+```
+
+# Con rotación Varimax
+factores_5_varimax <- fa(mat_cor, nfactors = 5, fm = "pa", rotate = "varimax")
+```{r , echo=FALSE}
+print(factores_5_varimax)
+```
+
+# Con rotación Oblimin
+factores_5_oblimin <- fa(mat_cor, nfactors = 5, fm = "pa", rotate = "oblimin")
+```{r , echo=FALSE}
+print(factores_5_oblimin)
+```
+# ---- Excluir variable V2 (Apariencia) ----
+
+# Calcular la matriz de correlación sin la columna V2
+mat_cor_no_v2 <- cor(Data[,-2])
+
+# Análisis factorial para 4 factores (sin V2)
+
+# Sin rotación
+factores_4_none_no_v2 <- fa(mat_cor_no_v2, nfactors = 4, fm = "pa", rotate = "none", max.iter = 100)
+```{r , echo=FALSE}
+print(factores_4_none_no_v2)
+```
+
+# Con rotación Varimax
+factores_4_varimax_no_v2 <- fa(mat_cor_no_v2, nfactors = 4, fm = "pa", rotate = "varimax")
+```{r , echo=FALSE}
+print(factores_4_varimax_no_v2)
+```
+
+# Con rotación Oblimin
+factores_4_oblimin_no_v2 <- fa(mat_cor_no_v2, nfactors = 4, fm = "pa", rotate = "oblimin")
+```{r , echo=FALSE}
+print(factores_4_oblimin_no_v2)
+```
+
+# ---- Guardar cargas factoriales ----
+
+# Cargas factoriales para 4 factores con rotación Varimax
+cargas_4_varimax <- factores_4_varimax$load
+```{r , echo=FALSE}
+print(cargas_4_varimax)
+```
+
+# Cargas factoriales para 5 factores con rotación Varimax
+cargas_5_varimax <- factores_5_varimax$load
+```{r , echo=FALSE}
+print(cargas_5_varimax)
+```
+
+# Cargas factoriales para 4 factores con rotación Oblimin (sin V2)
+cargas_4_oblimin_no_v2 <- factores_4_oblimin_no_v2$load
+```{r , echo=FALSE}
+print(cargas_4_oblimin_no_v2)
+```
+
+# ---- Scores utilizando regresión y con rotación  ----
+# Realizar el análisis factorial directamente con los datos originales
+factores_varimax <- fa(Data, nfactors = 4, fm = "pa", rotate = "varimax", scores = "regression")
+
+# Obtener los scores factoriales
+scores <- factores_varimax$scores
+
+```{r , echo=FALSE}
+# Ver los primeros puntajes factoriales
+head(scores)
+```
+
+
